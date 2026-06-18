@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 再次相见</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fdebd0 0%, #f5d6a8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+            color: #2c2c2c;
+        }
+
+        .page-wrap {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(6px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 2rem 2.5rem 3rem;
+            box-shadow: 0 20px 40px -12px rgba(150, 90, 30, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        /* 顶部导航 */
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px solid rgba(180, 120, 60, 0.25);
+            margin-bottom: 2.2rem;
+        }
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            color: #7f5539;
+            background: rgba(255, 235, 200, 0.6);
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4a3a2a;
+            font-weight: 500;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .nav-links a:hover {
+            border-bottom-color: #b07d55;
+            color: #3d2c1b;
+        }
+
+        /* hero */
+        .hero {
+            text-align: center;
+            padding: 2.8rem 0 2rem;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #3f2e1c;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #5a4632;
+            max-width: 680px;
+            margin: 0 auto;
+            background: rgba(255, 245, 220, 0.5);
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 核心介绍卡片 */
+        .intro-card {
+            background: white;
+            padding: 2rem 2.2rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(100, 65, 30, 0.08);
+            margin: 2rem 0 2.5rem;
+            transition: box-shadow 0.2s;
+        }
+        .intro-card:hover {
+            box-shadow: 0 12px 28px rgba(120, 75, 35, 0.12);
+        }
+        .intro-card h2 {
+            font-size: 1.6rem;
+            color: #5a3f26;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .intro-card p {
+            font-size: 1.05rem;
+            color: #3e3328;
+            margin-bottom: 1rem;
+        }
+        .intro-card a {
+            color: #8b5f3a;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #e3c9ae;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .intro-card a:hover {
+            border-bottom-color: #a67a52;
+            background: #faf0e2;
+        }
+
+        /* 三个场景模块 */
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2rem 0 2.8rem;
+        }
+        .scene-item {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem 2rem;
+            box-shadow: 0 6px 16px rgba(90, 60, 25, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+            border: 1px solid rgba(230, 200, 160, 0.25);
+        }
+        .scene-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(110, 70, 30, 0.10);
+        }
+        .scene-item h3 {
+            font-size: 1.3rem;
+            color: #613f27;
+            margin-bottom: 0.7rem;
+            border-left: 5px solid #dbb68c;
+            padding-left: 0.8rem;
+        }
+        .scene-item p {
+            font-size: 0.98rem;
+            color: #3f362c;
+        }
+
+        /* 常见说明 (FAQ 摘要) 简洁 */
+        .faq-summary {
+            background: rgba(255, 240, 218, 0.6);
+            backdrop-filter: blur(2px);
+            border-radius: 36px;
+            padding: 1.8rem 2.2rem 2.2rem;
+            margin: 2.2rem 0 1.8rem;
+            border: 1px solid rgba(200, 160, 110, 0.2);
+        }
+        .faq-summary h2 {
+            font-size: 1.3rem;
+            color: #4f3824;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-bottom: 1.2rem;
+        }
+        .faq-q {
+            font-weight: 600;
+            color: #3b2b1b;
+        }
+        .faq-a {
+            color: #534434;
+            padding-left: 0.5rem;
+            border-left: 3px solid #d4b48c;
+        }
+
+        /* 再次访问提示 */
+        .revisit-note {
+            background: white;
+            border-radius: 40px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(120, 80, 40, 0.06);
+            margin: 1rem 0 0.8rem;
+            font-size: 1.05rem;
+            color: #3e2e1e;
+        }
+        .revisit-note a {
+            color: #7f583b;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px dotted #c9ab8a;
+            transition: border-bottom-style 0.2s;
+        }
+        .revisit-note a:hover {
+            border-bottom-style: solid;
+            background: #f9edd9;
+        }
+
+        .footer-meta {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6f5d4a;
+            border-top: 1px solid rgba(160, 120, 70, 0.2);
+            padding-top: 1.6rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 800px) {
+            .page-wrap {
+                padding: 1.8rem 1.5rem;
+            }
+            .scenes-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 520px) {
+            .scenes-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .intro-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 顶部导航 -->
+    <nav class="nav-bar">
+        <span class="nav-logo">◈ 再次</span>
+        <div class="nav-links">
+            <a href="#">收藏夹</a>
+            <a href="#">随记</a>
+            <a href="#">场景</a>
+            <a href="#">备忘</a>
+        </div>
+    </nav>
+
+    <!-- hero 区域 -->
+    <div class="hero">
+        <h1>再次遇见 · 开云</h1>
+        <p>每次重新打开，都是一次熟悉的抵达</p>
+    </div>
+
+    <!-- 核心介绍卡片 (自然包含链接) -->
+    <div class="intro-card">
+        <h2>◈ 关于这个站点</h2>
+        <p>
+            如果你曾收藏过 <a href="https://www.oldplayer-kaiyun.com.cn">开云</a>，那么这次回来，你会发现内容依然整洁、克制。
+            这里没有繁复的跳转，只有围绕特定主题的安静整理。无论是浏览记录、零散想法，还是几个常见问题的说明，
+            都逐渐沉淀成一份可反复查阅的笔记。本站保持轻量，只做三件事：记录、归档、方便你再次找到。
+        </p>
+        <p>
+            页面以暖色渐变和白色卡片为主，不堆砌元素，只希望每一次回访都清爽顺手。
+            如果你愿意，把 <a href="https://www.oldplayer-kaiyun.com.cn">开云</a> 放在书签里，
+            日后随时可以回来翻看这些整理过的内容。
+        </p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="scenes-grid">
+        <div class="scene-item">
+            <h3>🌿 重新打开</h3>
+            <p>隔了一段时间再次访问，页面依然干净，结构没变。适合快速浏览之前关注的段落，或者确认某个说明。</p>
+        </div>
+        <div class="scene-item">
+            <h3>📌 收藏与回顾</h3>
+            <p>将链接存入浏览器收藏夹，或记在备忘录里。下次想查某个细节时，直接打开，不用重新搜索。</p>
+        </div>
+        <div class="scene-item">
+            <h3>🔁 持续关注</h3>
+            <p>如果你是常回来看看的人，会发现内容会慢慢补充，但不会突然变得冗长。保持可读性，算是一种默契。</p>
+        </div>
+    </div>
+
+    <!-- 常见说明（FAQ 摘要） -->
+    <div class="faq-summary">
+        <h2>📖 一些常见说明</h2>
+        <div class="faq-item">
+            <span class="faq-q">这个页面主要记录什么？</span>
+            <span class="faq-a">围绕特定主题的笔记、场景分类、以及一些使用提示。不包含推广或外部广告。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">内容会频繁更新吗？</span>
+            <span class="faq-a">不追求频繁更新，有值得补充的才会调整。每次变动都会保留主要结构和风格。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">链接为什么只有“开云”两个字？</span>
+            <span class="faq-a">为了简洁自然，把链接嵌在句子里，方便阅读时直接识别，避免多余的引导词。</span>
+        </div>
+    </div>
+
+    <!-- 再次访问提示 + 收藏相关 (内嵌链接) -->
+    <div class="revisit-note">
+        <p>🔖 如果你觉得这个页面以后还用得上，可以把 <a href="https://www.oldplayer-kaiyun.com.cn">开云</a> 加入收藏夹，方便下次直接回来。简洁、清晰、不打扰，是这里一直想保持的状态。</p>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-meta">
+        <span>内容整理 · 安静迭代</span>
+    </div>
+
+</div>
+</body>
+</html>
